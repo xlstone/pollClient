@@ -1,0 +1,28 @@
+
+
+1. 以下对象单独一个文件，独自管理
+	(自身函数要线程安全)
+	1. poll 
+	2. tcp client 
+	3. tcp server 
+	4. udp client 
+	5. udp server 
+	6. http server 
+	7. timer 
+
+
+2. 创建对象和删除对象使用统一的函数类型
+	create_tcp_client  destory_tcp_client 
+
+3. 统一的send函数
+	tcp_client_send(buf, buflen)
+
+4. 设置收recv回调函数
+	可以在创建完对象后使用
+	tcp_client_set_callback(tcp_client, recv_callback)
+	
+5. 对于recv_buf 使用完后，要有函数偏移
+	tcp_client_recv_buf_offset(tcp_client, offset)
+	
+6. 各个功能使用模块宏来控制， 在Makefile中定义各个宏
+
